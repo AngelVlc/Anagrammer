@@ -7,19 +7,21 @@ namespace Anagrammer
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Resources.PressAnyKey);
+
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             if (args.Length != 1)
             {
-                Console.WriteLine("Invalid arguments!");
-                Console.WriteLine(@"I need an argument with the path to the file which contains the words (e.g. c:\words.txt)");
+                Console.WriteLine(Resources.InvalidArgs);
+                Console.WriteLine(Resources.ArgumentsHelp);
                 CloseApp();
                 return;
             }
 
             if (!File.Exists(args[0]))
             {
-                Console.WriteLine($"The file '{args[0]}' does not exist");
+                Console.WriteLine(string.Format(Resources.FileDoesNotExist, args[0]));
                 CloseApp();
                 return;
             }
@@ -34,21 +36,32 @@ namespace Anagrammer
 
             if (wordsInFile.Length == 0)
             {
-                Console.WriteLine($"The file '{args[0]}' does not have any content");
+                Console.WriteLine(string.Format(Resources.FileIsEmpty, args[0]));
                 CloseApp();
                 return;
             }
 
             var anagrammer = new Anagrammer(wordsInFile);
 
+            try
+            {
+                anagrammer.CheckWords();
+            }
+            catch (AnagrammerCheckException agEx)
+            {
+                Console.WriteLine(agEx.Message);
+                CloseApp();
+                return;
+            }
 
-
+            Console.WriteLine(Resources.FileIsValid);
+                      
             Console.ReadLine();
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Console.WriteLine($"This is embarrassing, i had an exception:");
+            Console.WriteLine(Resources.UnhandledException);
             Console.WriteLine(e.ExceptionObject.ToString());
             CloseApp();
             return;
@@ -56,7 +69,7 @@ namespace Anagrammer
 
         private static void CloseApp()
         {
-            Console.WriteLine("Press any key to exit");
+            Console.WriteLine(Resources.PressAnyKey);
             Console.ReadLine();
         }
     }
