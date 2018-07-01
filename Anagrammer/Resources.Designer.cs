@@ -124,6 +124,24 @@ namespace Anagrammer {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Invalid option.
+        /// </summary>
+        internal static string ListInvalidOption {
+            get {
+                return ResourceManager.GetString("ListInvalidOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Press &apos;1&apos; to get the list ordered by word length or press &apos;2&apos; to get the list ordered by number of words: .
+        /// </summary>
+        internal static string ListOptions {
+            get {
+                return ResourceManager.GetString("ListOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Press any key to exit.
         /// </summary>
         internal static string PressAnyKey {

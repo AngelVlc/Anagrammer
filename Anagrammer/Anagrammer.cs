@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -39,8 +40,55 @@ namespace Anagrammer
             }
         }
 
+        public List<string> GetAnagramsByWordLength()
+        {
+            var dictionary = GetWordsDictionay();
 
+            var result = new List<string>();
 
+            foreach (var word in dictionary.Keys.OrderByDescending(key => key.Length))
+            {
+                result.Add(string.Join(" ", dictionary[word].OrderBy(i => i).ToArray()));
+            }
+
+            return result;
+        }
+
+        public List<string> GetAnagramsByWordsNumber()
+        {
+            var dictionary = GetWordsDictionay();
+
+            var result = new List<string>();
+
+            foreach (var value in dictionary.Values.OrderByDescending(value => value.Count()))
+            {
+                result.Add(string.Join(" ", value.OrderBy(i => i).ToArray()));
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, List<string>> GetWordsDictionay()
+        {
+            var dictionary = new Dictionary<string, List<string>>();
+
+            foreach (var l in _words)
+            {
+                var sorted = string.Concat(l.OrderBy(c => c));
+
+                List<string> found;
+
+                if (!dictionary.TryGetValue(sorted, out found))
+                {
+                    found = new List<string>();
+                    dictionary.Add(sorted, found);
+                }
+
+                found.Add(l);
+            }
+
+            return dictionary;
+        }
 
     }
 }

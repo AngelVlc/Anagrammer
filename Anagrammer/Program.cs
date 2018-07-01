@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Anagrammer
 {
@@ -7,8 +8,6 @@ namespace Anagrammer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Resources.PressAnyKey);
-
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             if (args.Length != 1)
@@ -55,7 +54,37 @@ namespace Anagrammer
             }
 
             Console.WriteLine(Resources.FileIsValid);
-                      
+
+
+            Console.Write(Resources.ListOptions);
+             var key = Console.ReadKey(false);
+                
+
+            while (key.KeyChar != '1' && key.KeyChar != '2')
+            {
+                Console.WriteLine();
+                Console.WriteLine(Resources.ListInvalidOption);
+                Console.Write(Resources.ListOptions);
+                key = Console.ReadKey(false);
+            }
+
+            List<string> result = null;
+
+            if (key.KeyChar == '1')
+            {
+                result = anagrammer.GetAnagramsByWordLength();
+            }
+            else
+            {
+                result = anagrammer.GetAnagramsByWordsNumber();
+            }
+
+            Console.WriteLine();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+
             Console.ReadLine();
         }
 

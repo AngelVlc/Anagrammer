@@ -138,6 +138,12 @@
   <data name="LineWithTwoWords" xml:space="preserve">
     <value>The line '{0}' of the file contains '{1}' words when only one is allowed</value>
   </data>
+  <data name="ListInvalidOption" xml:space="preserve">
+    <value>Invalid option</value>
+  </data>
+  <data name="ListOptions" xml:space="preserve">
+    <value>Press '1' to get the list ordered by word length or press '2' to get the list ordered by number of words: </value>
+  </data>
   <data name="PressAnyKey" xml:space="preserve">
     <value>Press any key to exit</value>
   </data>

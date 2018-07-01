@@ -1,6 +1,6 @@
 # Anagrammer 
 
-A .Net Core 2.0 console application which given a text file containing one word per line, prints out all the combinations of words that are anagrams.
+A .Net Core 2.0 console application which given a text file containing one word per line, prints out all the combinations of words that are anagrams. The result could be ordered by word length or by number of words.
 
 ## Build the solution
 
@@ -16,7 +16,6 @@ To run the application you can execute:
 
 ```
 cd Anagrammer\bin\Debug\netcoreapp2.0
-
 dotnet anagrammer.dll file_path
 ```
 
